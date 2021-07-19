@@ -1,0 +1,1 @@
+{"coffeeBeans":104,"money":554,"disposableCups":8,"milk":540,"water":150}
