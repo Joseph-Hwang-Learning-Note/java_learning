@@ -39,6 +39,12 @@ class CoffeeMachineStatus {
 
 public class AdvancedCoffeeMachine implements CoffeeMachine {
 
+    private final static String BUY = "buy";
+    private final static String FILL = "fill";
+    private final static String TAKE = "take";
+    private final static String REMAINING = "remaining";
+    private final static String EXIT = "exit";
+
     private static String statusFileName = "ingredients.txt";
     private final static File statusFile = new File(App.storageDir + "/" + statusFileName);
 
@@ -48,8 +54,8 @@ public class AdvancedCoffeeMachine implements CoffeeMachine {
         while (true) {
             System.out.println("Write action (buy, fill, take, remaining, exit): ");
             action = App.scanner.next();
-            if (Arrays.asList("buy", "fill", "take", "remaining", "exit").contains(action)) {
-                if (action.equals("exit")) {
+            if (Arrays.asList(BUY, FILL, TAKE, REMAINING, EXIT).contains(action)) {
+                if (action.equals(EXIT)) {
                     break;
                 }
                 executeAction(action);
@@ -62,16 +68,16 @@ public class AdvancedCoffeeMachine implements CoffeeMachine {
     private static void executeAction(String action) throws IOException {
         CoffeeMachineStatus currentStatus = getStatus();
         switch (action) {
-            case "buy":
+            case BUY:
                 currentStatus = buy(currentStatus);
                 break;
-            case "fill":
+            case FILL:
                 currentStatus = fill(currentStatus);
                 break;
-            case "take":
+            case TAKE:
                 currentStatus = take(currentStatus);
                 break;
-            case "remaining":
+            case REMAINING:
                 showStatus(currentStatus);
                 currentStatus = null;
                 break;
@@ -83,6 +89,10 @@ public class AdvancedCoffeeMachine implements CoffeeMachine {
             writeStatus(currentStatus);
         }
     }
+
+    private final static String ESPRESSO = "1";
+    private final static String LATTE = "2";
+    private final static String CAPPUCINO = "3";
 
     private static CoffeeMachineStatus buy(CoffeeMachineStatus currentStatus) throws IOException {
         Coffee coffee = null;
@@ -98,13 +108,13 @@ public class AdvancedCoffeeMachine implements CoffeeMachine {
             }
         }
         switch (action) {
-            case "1":
+            case ESPRESSO:
                 coffee = new Espresso();
                 break;
-            case "2":
+            case LATTE:
                 coffee = new Latte();
                 break;
-            case "3":
+            case CAPPUCINO:
                 coffee = new Cappuccino();
                 break;
             default:

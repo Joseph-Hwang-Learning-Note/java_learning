@@ -26,12 +26,15 @@ public class BasicCoffeeMachine implements CoffeeMachine {
         executeAction(mode);
     }
 
+    private final static int MAKE_COFFEE = 1;
+    private final static int ESTIMATE_SERVINGS = 2;
+
     private static void executeAction(int mode) {
         switch (mode) {
-            case 1:
+            case MAKE_COFFEE:
                 makeCoffee();
                 break;
-            case 2:
+            case ESTIMATE_SERVINGS:
                 estimateServings();
                 break;
             default:
